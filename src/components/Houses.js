@@ -85,8 +85,12 @@ class Houses extends React.Component {
                   </small>
                   <span className="price">${house.price}/night</span>
                   <span className="rating">
-                    <i className="fas fa-star"></i>
-                    <i className="far fa-star"></i>
+                    {[...Array(house.rating)].map((star, i) => {
+                      return <i className="fas fa-star" key={i}></i>;
+                    })}
+                    {[...Array(5 - house.rating)].map((star, i) => {
+                      return <i className="far fa-star" key={i}></i>;
+                    })}
                   </span>
                 </div>
               </a>
