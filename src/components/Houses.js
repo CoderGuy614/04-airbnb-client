@@ -48,7 +48,9 @@ class Houses extends React.Component {
         </nav>
         <div className="filters">
           <select>
-            <option value="">Min Bedrooms: 1</option>
+            {[...Array(6)].map((choice, i) => {
+              return <option value="">Min Bedrooms: {i + 1} </option>;
+            })}
           </select>
           <select>
             <option value="">All Types</option>

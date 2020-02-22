@@ -30,7 +30,7 @@ class Favorites extends React.Component {
         <div className="narrow">
           <div className="grid four large">
             {// List of thumbnails
-            this.state.houses.map(house => (
+            this.state.houses.map((house, index) => (
               <Thumbnail house={house} key={index} />
             ))}
           </div>
