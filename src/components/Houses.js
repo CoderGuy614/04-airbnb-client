@@ -35,6 +35,19 @@ class Houses extends React.Component {
         console.log({ err });
       });
   }
+
+  componentDidMount() {
+    axios
+      .get(`${process.env.REACT_APP_API}/types`)
+      .then(res => {
+        let typesArray = [];
+        res.data.map(type => typesArray.push(type.name));
+        this.setState({
+          types: typesArray
+        });
+      })
+      .catch(err => console.log(err));
+  }
   render() {
     return (
       <>
@@ -49,12 +62,14 @@ class Houses extends React.Component {
         <div className="filters">
           <select>
             {[...Array(6)].map((choice, i) => {
-              return <option value="">Min Bedrooms: {i + 1} </option>;
+              return (
+                <option key={i} value="">
+                  Min Bedrooms: {i + 1}{" "}
+                </option>
+              );
             })}
           </select>
-          <select>
-            <option value="">All Types</option>
-          </select>
+          <select>{/* Put the types options here */}</select>
           <input type="number" placeholder="max price" />
           <select>
             <option value="price">Lowest Price</option>
