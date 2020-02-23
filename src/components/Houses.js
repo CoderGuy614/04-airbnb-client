@@ -87,6 +87,27 @@ class Houses extends React.Component {
       });
     }
   };
+  sortBy = e => {
+    let sortBy = e.target.value;
+    let originalHouses = this.state.originalHouses;
+    if (sortBy == "price") {
+      let sortedHouses = originalHouses.sort((a, b) => {
+        return a.price - b.price;
+      });
+      this.setState({
+        houses: sortedHouses,
+        originalHouses: originalHouses
+      });
+    } else {
+      let sortedHouses = originalHouses.sort((a, b) => {
+        return b.rating - a.rating;
+      });
+      this.setState({
+        houses: sortedHouses,
+        originalHouses: originalHouses
+      });
+    }
+  };
   componentWillMount() {
     axios
       .get(`${process.env.REACT_APP_API}/houses`)
@@ -149,7 +170,8 @@ class Houses extends React.Component {
             type="number"
             placeholder="max price"
           />
-          <select>
+          <select onChange={this.sortBy}>
+            <option value="price">Sort By</option>
             <option value="price">Lowest Price</option>
             <option value="rating">Highest Rating</option>
           </select>
