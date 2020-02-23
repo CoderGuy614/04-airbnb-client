@@ -25,7 +25,6 @@ class Houses extends React.Component {
   };
 
   search = e => {
-    console.log(e.target.value);
     let target = e.target.value.toLowerCase();
     let originalHouses = this.state.originalHouses;
     let filteredHouses = originalHouses.filter(h => {
@@ -41,6 +40,35 @@ class Houses extends React.Component {
     });
   };
 
+  typeSelect = e => {
+    let typeChoice = e.target.value;
+    let originalHouses = this.state.originalHouses;
+    if (typeChoice == "all") {
+      this.setState({
+        houses: originalHouses
+      });
+    } else {
+      let filteredHouses = originalHouses.filter(h => {
+        return h.type.name == typeChoice;
+      });
+      this.setState({
+        houses: filteredHouses,
+        originalHouses: originalHouses
+      });
+    }
+  };
+
+  bedroomSelect = e => {
+    let bedroomChoice = e.target.value;
+    let originalHouses = this.state.originalHouses;
+    let filteredHouses = originalHouses.filter(h => {
+      return Number(h.bedrooms) >= Number(bedroomChoice);
+    });
+    this.setState({
+      houses: filteredHouses,
+      originalHouses: originalHouses
+    });
+  };
   componentWillMount() {
     axios
       .get(`${process.env.REACT_APP_API}/houses`)
@@ -79,19 +107,20 @@ class Houses extends React.Component {
           </div>
         </nav>
         <div className="filters">
-          <select>
+          <select onChange={this.bedroomSelect}>
             {[...Array(6)].map((choice, i) => {
               return (
-                <option key={i} value="">
+                <option key={i} value={i + 1}>
                   Min Bedrooms: {i + 1}{" "}
                 </option>
               );
             })}
           </select>
-          <select>
+          <select onChange={this.typeSelect}>
+            <option value="all">All Types</option>
             {this.state.types.map((type, i) => {
               return (
-                <option key={i} value="">
+                <option key={i} value={type}>
                   {type}
                 </option>
               );
