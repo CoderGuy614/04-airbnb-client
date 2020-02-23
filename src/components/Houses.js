@@ -23,12 +23,31 @@ class Houses extends React.Component {
       zoom: 14
     }
   };
+
+  search = e => {
+    console.log(e.target.value);
+    let target = e.target.value.toLowerCase();
+    let originalHouses = this.state.originalHouses;
+    let filteredHouses = originalHouses.filter(h => {
+      return (
+        h.title.toLowerCase().includes(target) ||
+        h.city.toLowerCase().includes(target) ||
+        h.region.toLowerCase().includes(target)
+      );
+    });
+    this.setState({
+      houses: filteredHouses,
+      originalHouses: originalHouses
+    });
+  };
+
   componentWillMount() {
     axios
       .get(`${process.env.REACT_APP_API}/houses`)
       .then(res => {
         this.setState({
-          houses: res.data
+          houses: res.data,
+          originalHouses: res.data
         });
       })
       .catch(err => {
@@ -83,7 +102,12 @@ class Houses extends React.Component {
             <option value="price">Lowest Price</option>
             <option value="rating">Highest Rating</option>
           </select>
-          <input type="text" className="search" placeholder="Search..." />
+          <input
+            onChange={this.search}
+            type="text"
+            className="search"
+            placeholder="Search..."
+          />
         </div>
         <div className="grid map">
           <div className="grid four large">
