@@ -69,7 +69,15 @@ class Houses extends React.Component {
               );
             })}
           </select>
-          <select>{/* Put the types options here */}</select>
+          <select>
+            {this.state.types.map((type, i) => {
+              return (
+                <option key={i} value="">
+                  {type}
+                </option>
+              );
+            })}
+          </select>
           <input type="number" placeholder="max price" />
           <select>
             <option value="price">Lowest Price</option>
@@ -79,8 +87,7 @@ class Houses extends React.Component {
         </div>
         <div className="grid map">
           <div className="grid four large">
-            {// List of thumbnails
-            this.state.houses.map((house, index) => (
+            {this.state.houses.map((house, index) => (
               <Thumbnail house={house} key={index} />
             ))}
           </div>
