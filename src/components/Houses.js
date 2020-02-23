@@ -69,6 +69,24 @@ class Houses extends React.Component {
       originalHouses: originalHouses
     });
   };
+
+  maxPrice = e => {
+    let originalHouses = this.state.originalHouses;
+    let maxPrice = e.target.value;
+    if (maxPrice) {
+      let filteredHouses = originalHouses.filter(h => {
+        return h.price <= maxPrice;
+      });
+      this.setState({
+        houses: filteredHouses,
+        originalHouses: originalHouses
+      });
+    } else {
+      this.setState({
+        houses: originalHouses
+      });
+    }
+  };
   componentWillMount() {
     axios
       .get(`${process.env.REACT_APP_API}/houses`)
@@ -126,7 +144,11 @@ class Houses extends React.Component {
               );
             })}
           </select>
-          <input type="number" placeholder="max price" />
+          <input
+            onChange={this.maxPrice}
+            type="number"
+            placeholder="max price"
+          />
           <select>
             <option value="price">Lowest Price</option>
             <option value="rating">Highest Rating</option>
