@@ -9,6 +9,7 @@ import "../styles/nav.css";
 import Thumbnail from "./Thumbnail";
 import Pin from "./Pin";
 import Nav from "./Nav";
+import Review from "./Review";
 
 class Houses extends React.Component {
   state = {
