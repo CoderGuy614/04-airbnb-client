@@ -1,4 +1,5 @@
 import React from "react";
+import StarRating from "./StarRating";
 
 class Thumbnail extends React.Component {
   state = {
@@ -32,14 +33,7 @@ class Thumbnail extends React.Component {
             </span>
           </small>
           <span className="price">${this.state.house.price}/night</span>
-          <span className="rating">
-            {[...Array(this.state.house.rating)].map((star, i) => {
-              return <i className="fas fa-star" key={i}></i>;
-            })}
-            {[...Array(5 - this.state.house.rating)].map((star, i) => {
-              return <i className="far fa-star" key={i}></i>;
-            })}
-          </span>
+          <StarRating rating={this.state.house.rating} />
         </div>
       </a>
     );

@@ -3,6 +3,7 @@ import axios from "axios";
 // Components
 import Nav from "./Nav";
 import Gallery from "./Gallery";
+import StarRating from "./StarRating";
 
 // CSS
 import "../styles/cards.css";
@@ -153,15 +154,20 @@ class House extends React.Component {
                     <small>per night</small>
                   </h3>
                   <small>
-                    <i className="fas fa-star"></i>
-                    <i className="far fa-star"></i>
+                    <StarRating rating={this.state.house.rating} />
                     <span>{this.state.reviews.length} Reviews</span>
                   </small>
                   <form className="small">
                     <div className="group">
                       <label>Guests</label>
                       <select>
-                        <option>1 guests</option>
+                        {[...Array(this.state.house.guests)].map((g, i) => {
+                          return (
+                            <option key={i} value="">
+                              {i + 1} guests
+                            </option>
+                          );
+                        })}
                       </select>
                     </div>
                     <div className="group">
