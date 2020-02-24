@@ -8,6 +8,7 @@ import "../styles/maps.css";
 import "../styles/nav.css";
 import Thumbnail from "./Thumbnail";
 import Pin from "./Pin";
+import Nav from "./Nav";
 
 class Houses extends React.Component {
   state = {
@@ -149,14 +150,7 @@ class Houses extends React.Component {
   render() {
     return (
       <>
-        <nav>
-          <a href="/" className="logo"></a>
-          <div className="profile">
-            <a href="/plus" className="button">
-              <span>Airbnb Plus</span>
-            </a>
-          </div>
-        </nav>
+        <Nav />
         <div className="filters">
           <select onChange={this.bedroomSelect}>
             {[...Array(6)].map((choice, i) => {
