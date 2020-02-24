@@ -28,7 +28,7 @@ class Houses extends React.Component {
   search = e => {
     let target = e.target.value.toLowerCase();
     let originalHouses = this.state.originalHouses;
-    let filteredHouses = originalHouses.filter(h => {
+    let houses = originalHouses.filter(h => {
       return (
         h.title.toLowerCase().includes(target) ||
         h.city.toLowerCase().includes(target) ||
@@ -36,7 +36,7 @@ class Houses extends React.Component {
       );
     });
     this.setState({
-      houses: filteredHouses,
+      houses: houses,
       originalHouses: originalHouses
     });
   };
@@ -49,24 +49,35 @@ class Houses extends React.Component {
         houses: originalHouses
       });
     } else {
-      let filteredHouses = originalHouses.filter(h => {
+      let houses = originalHouses.filter(h => {
         return h.type.name == typeChoice;
       });
       this.setState({
-        houses: filteredHouses,
+        houses: houses,
         originalHouses: originalHouses
       });
     }
   };
 
+  houseHover = id => {
+    let houses = this.state.houses;
+    houses.map(h => {
+      h.selected = false;
+      return h;
+    });
+    let house = houses.find(h => h._id == id);
+    house.selected = true;
+    this.setState({ houses });
+  };
+
   bedroomSelect = e => {
     let bedroomChoice = e.target.value;
     let originalHouses = this.state.originalHouses;
-    let filteredHouses = originalHouses.filter(h => {
+    let houses = originalHouses.filter(h => {
       return Number(h.bedrooms) >= Number(bedroomChoice);
     });
     this.setState({
-      houses: filteredHouses,
+      houses: houses,
       originalHouses: originalHouses
     });
   };
@@ -75,11 +86,11 @@ class Houses extends React.Component {
     let originalHouses = this.state.originalHouses;
     let maxPrice = e.target.value;
     if (maxPrice) {
-      let filteredHouses = originalHouses.filter(h => {
+      let houses = originalHouses.filter(h => {
         return h.price <= maxPrice;
       });
       this.setState({
-        houses: filteredHouses,
+        houses: houses,
         originalHouses: originalHouses
       });
     } else {
@@ -92,19 +103,19 @@ class Houses extends React.Component {
     let sortBy = e.target.value;
     let originalHouses = this.state.originalHouses;
     if (sortBy == "price") {
-      let sortedHouses = originalHouses.sort((a, b) => {
+      let houses = originalHouses.sort((a, b) => {
         return a.price - b.price;
       });
       this.setState({
-        houses: sortedHouses,
+        houses: houses,
         originalHouses: originalHouses
       });
     } else {
-      let sortedHouses = originalHouses.sort((a, b) => {
+      let houses = originalHouses.sort((a, b) => {
         return b.rating - a.rating;
       });
       this.setState({
-        houses: sortedHouses,
+        houses: houses,
         originalHouses: originalHouses
       });
     }
@@ -187,7 +198,11 @@ class Houses extends React.Component {
           <div className="grid four large">
             {this.state.houses.map((house, index) => (
               <Link key={index} to={`/houses/${house._id}`}>
-                <Thumbnail house={house} key={index} />
+                <Thumbnail
+                  house={house}
+                  key={index}
+                  houseHover={this.houseHover}
+                />
               </Link>
             ))}
           </div>

@@ -16,6 +16,18 @@ class Favorites extends React.Component {
         console.log(err);
       });
   }
+
+  houseHover = id => {
+    let houses = this.state.houses;
+    houses.map(h => {
+      h.selected = false;
+      return h;
+    });
+    let house = houses.find(h => h._id == id);
+    house.selected = true;
+    this.setState({ houses });
+  };
+
   render() {
     return (
       <>
@@ -31,7 +43,11 @@ class Favorites extends React.Component {
           <div className="grid four large">
             {// List of thumbnails
             this.state.houses.map((house, index) => (
-              <Thumbnail house={house} key={index} />
+              <Thumbnail
+                house={house}
+                key={index}
+                houseHover={this.houseHover}
+              />
             ))}
           </div>
         </div>
