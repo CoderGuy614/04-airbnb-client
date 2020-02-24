@@ -121,7 +121,7 @@ class Houses extends React.Component {
       });
     }
   };
-  componentWillMount() {
+  componentDidMount() {
     axios
       .get(`${process.env.REACT_APP_API}/houses`)
       .then(res => {
@@ -133,9 +133,6 @@ class Houses extends React.Component {
       .catch(err => {
         console.log({ err });
       });
-  }
-
-  componentDidMount() {
     axios
       .get(`${process.env.REACT_APP_API}/types`)
       .then(res => {
