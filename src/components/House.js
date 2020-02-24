@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 // Components
 import Nav from "./Nav";
+import Gallery from "./Gallery";
 
 // CSS
 import "../styles/cards.css";
@@ -31,8 +32,21 @@ class House extends React.Component {
     axios
       .get(`${process.env.REACT_APP_API}/houses/${this.props.match.params.id}`)
       .then(res => {
+        console.log(res.data);
         this.setState({
           house: res.data
+        });
+      })
+      .catch(err => {
+        console.log({ err });
+      });
+    axios
+      .get(
+        `${process.env.REACT_APP_API}/reviews/?house=${this.props.match.params.id}`
+      )
+      .then(res => {
+        this.setState({
+          reviews: res.data
         });
       })
       .catch(err => {
@@ -43,14 +57,7 @@ class House extends React.Component {
     return (
       <>
         <Nav />
-        <div className="gallery">
-          <div className="image-main"></div>
-          <div className="previews">
-            {this.state.house.images.map((image, i) => (
-              <div className="preview" key={i}></div>
-            ))}
-          </div>
-        </div>
+        <Gallery images={this.state.house.images} />
         <div className="grid medium">
           <div className="grid sidebar-right">
             <div className="content">
