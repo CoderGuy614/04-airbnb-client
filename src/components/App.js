@@ -10,6 +10,7 @@ class App extends React.Component {
       <BrowserRouter>
         <Switch>
           <Route path="/houses/:id" component={House} />
+          <Route path="/plus" component={Plus} />
           <Route path="/" component={Houses} />
         </Switch>
       </BrowserRouter>
