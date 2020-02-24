@@ -14,7 +14,12 @@ export default class Review extends Component {
             <div className="card review" key={i}>
               <div className="content">
                 <div className="user">
-                  <div className="avatar"></div>
+                  <div
+                    className="avatar"
+                    style={{
+                      backgroundImage: `url('${review.author.avatar}')`
+                    }}
+                  ></div>
                   <div className="name">
                     <span>{review.author.name}</span>
                     <small>{review.author.location}</small>
