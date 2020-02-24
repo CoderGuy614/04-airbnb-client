@@ -185,7 +185,9 @@ class Houses extends React.Component {
         <div className="grid map">
           <div className="grid four large">
             {this.state.houses.map((house, index) => (
-              <Thumbnail house={house} key={index} />
+              <Link to={`/houses/${house._id}`}>
+                <Thumbnail house={house} key={index} />
+              </Link>
             ))}
           </div>
           <div className="map">
