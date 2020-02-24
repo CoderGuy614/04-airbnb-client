@@ -69,7 +69,12 @@ class House extends React.Component {
                 </span>
               </small>
               <div className="user">
-                <div className="avatar"></div>
+                <div
+                  className="avatar"
+                  style={{
+                    backgroundImage: `url('${this.state.house.host.avatar}')`
+                  }}
+                ></div>
                 <div className="name">
                   <small>Hosted by</small>
                   <span>{this.state.house.host.name}</span>
