@@ -16,9 +16,9 @@ p + h3 {
 }
 
 .link {
-  color: black;
+  color: #00988f;
   cursor: pointer;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 hr {
