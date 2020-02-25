@@ -45,10 +45,10 @@ a.card {
   border-radius: 6px 6px 0 0;
   height: 160px;
   background-color: #8a8a8a;
-  background-size: 150px;
+  background-size: auto 100%;
   position: relative;
   background-size: cover;
-  background-position: center;
+  background-position: center center;
   background-repeat: no-repeat;
 }
 
