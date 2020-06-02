@@ -17,7 +17,7 @@ class Houses extends React.Component {
     types: [],
     map: {
       key: {
-        key: "AIzaSyBsOnaWJAwFPKILNoWZHXz2h9H6HE8oKOs",
+        key: `${process.env.REACT_APP_MAP_KEY}`,
       },
       center: {
         lat: -8.652,
