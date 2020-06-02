@@ -17,20 +17,20 @@ class Houses extends React.Component {
     types: [],
     map: {
       key: {
-        key: "AIzaSyBKMVj4gaJLU9GTV1zOaWQj7ggKVbXQep0"
+        key: "AIzaSyBsOnaWJAwFPKILNoWZHXz2h9H6HE8oKOs",
       },
       center: {
         lat: -8.652,
-        lng: 115.137
+        lng: 115.137,
       },
-      zoom: 14
-    }
+      zoom: 14,
+    },
   };
 
-  search = e => {
+  search = (e) => {
     let target = e.target.value.toLowerCase();
     let originalHouses = this.state.originalHouses;
-    let houses = originalHouses.filter(h => {
+    let houses = originalHouses.filter((h) => {
       return (
         h.title.toLowerCase().includes(target) ||
         h.city.toLowerCase().includes(target) ||
@@ -39,69 +39,69 @@ class Houses extends React.Component {
     });
     this.setState({
       houses: houses,
-      originalHouses: originalHouses
+      originalHouses: originalHouses,
     });
   };
 
-  typeSelect = e => {
+  typeSelect = (e) => {
     let typeChoice = e.target.value;
     let originalHouses = this.state.originalHouses;
     if (typeChoice == "all") {
       this.setState({
-        houses: originalHouses
+        houses: originalHouses,
       });
     } else {
-      let houses = originalHouses.filter(h => {
+      let houses = originalHouses.filter((h) => {
         return h.type.name == typeChoice;
       });
       this.setState({
         houses: houses,
-        originalHouses: originalHouses
+        originalHouses: originalHouses,
       });
     }
   };
 
-  houseHover = id => {
+  houseHover = (id) => {
     let houses = this.state.houses;
-    houses.map(h => {
+    houses.map((h) => {
       h.selected = false;
       return h;
     });
-    let house = houses.find(h => h._id == id);
+    let house = houses.find((h) => h._id == id);
     house.selected = true;
     this.setState({ houses });
   };
 
-  bedroomSelect = e => {
+  bedroomSelect = (e) => {
     let bedroomChoice = e.target.value;
     let originalHouses = this.state.originalHouses;
-    let houses = originalHouses.filter(h => {
+    let houses = originalHouses.filter((h) => {
       return Number(h.bedrooms) >= Number(bedroomChoice);
     });
     this.setState({
       houses: houses,
-      originalHouses: originalHouses
+      originalHouses: originalHouses,
     });
   };
 
-  maxPrice = e => {
+  maxPrice = (e) => {
     let originalHouses = this.state.originalHouses;
     let maxPrice = e.target.value;
     if (maxPrice) {
-      let houses = originalHouses.filter(h => {
+      let houses = originalHouses.filter((h) => {
         return h.price <= maxPrice;
       });
       this.setState({
         houses: houses,
-        originalHouses: originalHouses
+        originalHouses: originalHouses,
       });
     } else {
       this.setState({
-        houses: originalHouses
+        houses: originalHouses,
       });
     }
   };
-  sortBy = e => {
+  sortBy = (e) => {
     let sortBy = e.target.value;
     let originalHouses = this.state.originalHouses;
     if (sortBy == "price") {
@@ -110,7 +110,7 @@ class Houses extends React.Component {
       });
       this.setState({
         houses: houses,
-        originalHouses: originalHouses
+        originalHouses: originalHouses,
       });
     } else {
       let houses = originalHouses.sort((a, b) => {
@@ -118,32 +118,32 @@ class Houses extends React.Component {
       });
       this.setState({
         houses: houses,
-        originalHouses: originalHouses
+        originalHouses: originalHouses,
       });
     }
   };
   componentDidMount() {
     axios
       .get(`${process.env.REACT_APP_API}/houses`)
-      .then(res => {
+      .then((res) => {
         this.setState({
           houses: res.data,
-          originalHouses: res.data
+          originalHouses: res.data,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         console.log({ err });
       });
     axios
       .get(`${process.env.REACT_APP_API}/types`)
-      .then(res => {
+      .then((res) => {
         let typesArray = [];
-        res.data.map(type => typesArray.push(type.name));
+        res.data.map((type) => typesArray.push(type.name));
         this.setState({
-          types: typesArray
+          types: typesArray,
         });
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   }
   render() {
     return (
